@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snip: a small, fast replacement for the Windows Snipping Tool</title>
+<meta name="description" content="Screenshots, full-page scrolling captures and screen recordings with auto-zoom, all on Win+Shift+S. One 120 KB executable, free and open source.">
+<link rel="icon" href="icon.png">
+<meta property="og:type" content="video.other">
+<meta property="og:site_name" content="Snip">
+<meta property="og:title" content="Snip: a small, fast replacement for the Windows Snipping Tool">
+<meta property="og:description" content="Screenshots, full-page scrolling captures and screen recordings with auto-zoom, all on Win+Shift+S. One 120 KB executable, free and open source.">
+<meta property="og:url" content="https://latinrev.github.io/snip/">
+<meta property="og:image" content="https://latinrev.github.io/snip/poster.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:video" content="https://latinrev.github.io/snip/demo.mp4">
+<meta property="og:video:secure_url" content="https://latinrev.github.io/snip/demo.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="1280">
+<meta property="og:video:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Snip: a small, fast replacement for the Windows Snipping Tool">
+<meta name="twitter:description" content="Screenshots, full-page scrolling captures and screen recordings with auto-zoom, all on Win+Shift+S.">
+<meta name="twitter:image" content="https://latinrev.github.io/snip/poster.jpg">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.6 "Segoe UI", system-ui, sans-serif; color: #e2e8f0; background: linear-gradient(160deg, #0f172a, #1e1b4b 60%, #0e7490); min-height: 100vh; }
+  main { max-width: 1040px; margin: 0 auto; padding: 56px 24px 72px; }
+  header { display: flex; align-items: center; gap: 18px; }
+  header img { width: 64px; height: 64px; }
+  h1 { margin: 0; font-size: 44px; letter-spacing: -.03em; color: #fff; }
+  .tag { margin: 18px 0 28px; font-size: 21px; color: #cbd5e1; max-width: 720px; }
+  kbd { font: 600 15px "Segoe UI", sans-serif; background: #1e293b; border: 1px solid #334155; border-bottom-width: 3px; border-radius: 6px; padding: 1px 7px; color: #fff; }
+  .buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .buttons a { text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 10px; }
+  .primary { background: #0078d4; color: #fff; }
+  .secondary { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.15); }
+  video { width: 100%; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.45); display: block; background: #0f172a; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
+  figure { margin: 0; }
+  figure img { width: 100%; border-radius: 10px; display: block; }
+  figcaption { margin-top: 8px; color: #cbd5e1; font-size: 15px; }
+  figcaption b { color: #fff; }
+  footer { margin-top: 48px; color: #94a3b8; font-size: 14px; }
+  footer a { color: #cbd5e1; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 34px; } }
+</style>
+</head>
+<body>
+<main>
+  <header><img src="icon.png" alt=""><h1>Snip</h1></header>
+  <p class="tag">A small, fast replacement for the Windows Snipping Tool. Screenshots, full-page scrolling captures and screen recordings with auto-zoom, all on <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>.</p>
+  <div class="buttons">
+    <a class="primary" href="https://github.com/latinrev/snip/releases/latest">Download for Windows</a>
+    <a class="secondary" href="https://github.com/latinrev/snip">Source on GitHub</a>
+  </div>
+  <video src="demo.mp4" poster="poster.jpg" controls autoplay muted loop playsinline></video>
+  <div class="grid">
+    <figure><img src="screenshots/capture-bar.png" alt="The frozen screen with the Screenshot, Scrolling and Video bar"><figcaption><b>One shortcut.</b> The screen freezes and a bar switches between screenshot, scrolling and video.</figcaption></figure>
+    <figure><img src="screenshots/scrolling.png" alt="A scrolling capture in progress"><figcaption><b>Whole pages.</b> Snip scrolls the page and stitches it at full resolution, sticky headers kept once.</figcaption></figure>
+    <figure><img src="screenshots/recording.png" alt="A recording in progress with its outline and Stop button"><figcaption><b>Recordings that zoom.</b> Each click zooms the video in on the cursor, then eases back out.</figcaption></figure>
+    <figure><img src="screenshots/history.png" alt="The history panel listing recent screenshots"><figcaption><b>History.</b> <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> lists the last 24 hours. Pick one to paste it.</figcaption></figure>
+  </div>
+  <footer>One executable of about 120 KB. No installer, no account, no network access. Windows 10 version 2004 or later. <a href="https://github.com/latinrev/snip/blob/main/LICENSE">MIT license</a>.</footer>
+</main>
+</body>
+</html>

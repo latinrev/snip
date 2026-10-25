@@ -11,17 +11,31 @@ Screenshots, full-page scrolling captures and screen recordings with auto-zoom, 
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
+<p align="center"><a href="https://latinrev.github.io/snip/"><img src="docs/screenshots/play.jpg" width="820" alt="Watch the 75-second demo"></a><br><sub>Watch the demo: screenshot, scrolling capture, recording with auto-zoom, history.</sub></p>
+
 Snip is one executable of about 120 KB. It has no installer, no runtime to download, no account and no network access. It runs in the tray and takes over the screenshot shortcut, so the keys you already use open Snip instead of the built-in tool.
 
 ## Features
 
 **Screenshots.** Press <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> and the screen freezes. Drag to capture an area, click to capture the window under the cursor, or press <kbd>Enter</kbd> for the whole monitor. The image is copied to the clipboard and saved as a PNG, and a preview appears in the corner. Click the preview to open the file.
 
+<img src="docs/screenshots/capture-bar.png" width="820" alt="The frozen screen with the Screenshot, Scrolling and Video bar at the top">
+
 **Scrolling capture.** Switch to Scrolling in the bar at the top of the screen, then drag over a web page or click its window. Snip scrolls the page from top to bottom and stitches the screens into one tall image at full screen resolution, with no scaling. Sticky headers appear once at the top, sticky footers and floating chat buttons once at the bottom, and the scrollbar is trimmed off. It works in any app that scrolls with the mouse wheel. The test suite runs it against a real page in Microsoft Edge.
+
+<img src="docs/screenshots/scrolling.png" width="820" alt="A scrolling capture in progress, with its pixel count and Stop button">
+
+<details><summary>The stitched result, scaled down</summary>
+<img src="docs/screenshots/scroll-result.png" width="360" alt="The whole page as one tall image, 1800 by 5358 pixels">
+</details>
 
 **Screen recording with auto-zoom.** Switch to Video, then pick an area, a window or the whole screen. Snip records an H.264 MP4 at 30 frames per second. Each click zooms the video in on the cursor, follows it smoothly, and zooms back out after a few seconds, with a ripple where you clicked. The red outline and the Stop button are hidden from the recording. Press <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> again or click Stop to finish. The video is copied to the clipboard as a file, so you can paste it straight into a chat or a folder.
 
+<img src="docs/screenshots/recording.png" width="820" alt="A recording in progress, with the red outline and the Stop button below the area">
+
 **History.** Press <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> for a panel with every PNG saved to your Screenshots folder in the last 24 hours, newest first. Cards load as you scroll. Click one, or pick it with the arrow keys and <kbd>Enter</kbd>, and Snip copies it and pastes it into the app you were using.
+
+<img src="docs/screenshots/history.png" width="820" alt="The history panel listing the last 24 hours of screenshots">
 
 **Fits in.** Snip handles multiple monitors with different scaling, uses the same file names and folders as the Snipping Tool, starts with Windows, and stays out of the way in the tray. Its own windows, such as the preview and the history panel, never show up in captures.
 

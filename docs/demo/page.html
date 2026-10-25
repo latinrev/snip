@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Orbit · Q3 report</title>
+<style>
+  :root { --ink: #0f172a; --muted: #64748b; --line: #e2e8f0; --accent: #4f46e5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 "Segoe UI", system-ui, sans-serif; color: var(--ink); background: #f8fafc; }
+  nav { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 28px; padding: 14px 40px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav b { font-size: 18px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
+  nav b i { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(#4f46e5, #06b6d4, #22c55e, #4f46e5); display: inline-block; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  nav .cta { margin-left: auto; background: var(--ink); color: #fff; padding: 8px 16px; border-radius: 8px; }
+  header { padding: 72px 40px 56px; background: radial-gradient(1200px 400px at 20% -10%, #c7d2fe, transparent), radial-gradient(900px 400px at 90% 0%, #a5f3fc, transparent); }
+  header small { color: var(--accent); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+  h1 { font-size: 52px; line-height: 1.05; letter-spacing: -.035em; margin: 12px 0 16px; max-width: 760px; }
+  header p { font-size: 19px; color: #334155; max-width: 620px; margin: 0; }
+  main { max-width: 1120px; margin: 0 auto; padding: 0 40px 80px; }
+  h2 { font-size: 28px; letter-spacing: -.02em; margin: 64px 0 8px; }
+  .lead { color: var(--muted); margin: 0 0 24px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -28px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+  .stat span { color: var(--muted); font-size: 13px; }
+  .stat b { display: block; font-size: 32px; letter-spacing: -.03em; margin: 2px 0; }
+  .up { color: #16a34a; font-size: 13px; font-weight: 600; }
+  .chart { padding: 24px; }
+  .tabs { display: inline-flex; background: #f1f5f9; border-radius: 10px; padding: 4px; gap: 4px; }
+  .tabs button { border: 0; background: none; padding: 7px 16px; border-radius: 7px; font: 600 13px "Segoe UI", sans-serif; color: var(--muted); cursor: pointer; }
+  .tabs button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .bars { display: flex; align-items: flex-end; gap: 14px; height: 240px; margin-top: 24px; border-bottom: 1px solid var(--line); }
+  .bars div { flex: 1; border-radius: 8px 8px 0 0; background: linear-gradient(#818cf8, #4f46e5); transition: height .5s cubic-bezier(.2,.8,.2,1); }
+  .labels { display: flex; gap: 14px; margin-top: 8px; color: var(--muted); font-size: 12px; }
+  .labels span { flex: 1; text-align: center; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .feature h3 { margin: 12px 0 6px; font-size: 18px; }
+  .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+  .icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  .pill { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
+  pre { background: #0f172a; color: #e2e8f0; border-radius: 14px; padding: 22px 24px; font: 14px/1.7 Consolas, monospace; overflow: hidden; }
+  pre .k { color: #c4b5fd; } pre .s { color: #86efac; } pre .c { color: #64748b; }
+  blockquote { margin: 0; font-size: 22px; line-height: 1.45; letter-spacing: -.01em; }
+  .who { display: flex; align-items: center; gap: 12px; margin-top: 18px; color: var(--muted); font-size: 14px; }
+  .who i { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .timeline .card { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 12px; }
+  .timeline time { color: var(--accent); font-weight: 600; font-size: 13px; min-width: 64px; }
+  .timeline p { margin: 0; color: var(--muted); font-size: 15px; }
+  footer { margin-top: 80px; padding: 40px; background: var(--ink); color: #94a3b8; font-size: 14px; display: flex; justify-content: space-between; }
+  .help { position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 24px; box-shadow: 0 8px 24px rgba(79,70,229,.35); }
+</style>
+</head>
+<body>
+<nav><b><i></i>Orbit</b><a href="#">Overview</a><a href="#">Reports</a><a href="#">Customers</a><a href="#">Settings</a><a class="cta" href="#">Share report</a></nav>
+<header>
+  <small>Quarterly report · Q3</small>
+  <h1>Orbit grew 38% this quarter, and churn fell to a record low.</h1>
+  <p>Revenue, usage and retention for July through September, with the launches that moved them.</p>
+</header>
+<main>
+  <section class="stats">
+    <div class="card stat"><span>Revenue</span><b>$4.82M</b><em class="up">▲ 38% vs Q2</em></div>
+    <div class="card stat"><span>Active teams</span><b>12,940</b><em class="up">▲ 21%</em></div>
+    <div class="card stat"><span>Net retention</span><b>127%</b><em class="up">▲ 6 pts</em></div>
+    <div class="card stat"><span>Monthly churn</span><b>0.9%</b><em class="up">▼ 0.4 pts</em></div>
+  </section>
+
+  <h2>Revenue by month</h2>
+  <p class="lead">Every month beat the plan. September closed 12% above forecast.</p>
+  <div class="card chart">
+    <div class="tabs"><button class="on" data-set="0">Revenue</button><button data-set="1">Teams</button><button data-set="2">Seats</button></div>
+    <div class="bars" id="bars"></div>
+    <div class="labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div>
+  </div>
+
+  <h2>What shipped</h2>
+  <p class="lead">Six launches, three of them in the top ten requests.</p>
+  <div class="grid">
+    <div class="card feature"><div class="icon" style="background:#4f46e5">⚡</div><h3>Live dashboards</h3><p>Charts refresh as data lands, with no reload and no cache to clear.</p></div>
+    <div class="card feature"><div class="icon" style="background:#06b6d4">⇄</div><h3>Two-way sync</h3><p>Edits in Sheets flow back to Orbit within seconds, both directions.</p></div>
+    <div class="card feature"><div class="icon" style="background:#22c55e">✓</div><h3>Approvals</h3><p>Route a report to finance and see who signed off, and when.</p></div>
+    <div class="card feature"><div class="icon" style="background:#f59e0b">★</div><h3>Saved views</h3><p>Pin a filter set and share it with a link that keeps its state.</p></div>
+    <div class="card feature"><div class="icon" style="background:#ec4899">◎</div><h3>Goals</h3><p>Set a target on any metric and get a heads-up when it drifts.</p></div>
+    <div class="card feature"><div class="icon" style="background:#0f172a">⌘</div><h3>Command bar</h3><p>Jump to any report, customer or setting from the keyboard.</p></div>
+  </div>
+
+  <h2>Top accounts</h2>
+  <p class="lead">The ten largest accounts by annual contract value.</p>
+  <div class="card" style="padding:0">
+    <table>
+      <tr><th>Account</th><th>Plan</th><th>Seats</th><th>ACV</th><th>Health</th></tr>
+      <tr><td>Lumen Labs</td><td>Enterprise</td><td>1,240</td><td>$412,000</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Northwind</td><td>Enterprise</td><td>980</td><td>$356,500</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Fable & Co</td><td>Business</td><td>612</td><td>$198,900</td><td><span class="pill" style="background:#fef9c3;color:#854d0e">Watch</span></td></tr>
+      <tr><td>Kestrel Air</td><td>Enterprise</td><td>540</td><td>$187,000</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Parallax</td><td>Business</td><td>455</td><td>$151,200</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Quarry Health</td><td>Enterprise</td><td>420</td><td>$149,800</td><td><span class="pill" style="background:#fee2e2;color:#991b1b">At risk</span></td></tr>
+      <tr><td>Tidewater</td><td>Business</td><td>388</td><td>$121,000</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Vantage Bank</td><td>Enterprise</td><td>350</td><td>$118,400</td><td><span class="pill" style="background:#fef9c3;color:#854d0e">Watch</span></td></tr>
+      <tr><td>Juniper</td><td>Business</td><td>301</td><td>$97,600</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+      <tr><td>Ember Studio</td><td>Team</td><td>148</td><td>$41,300</td><td><span class="pill" style="background:#dcfce7;color:#166534">Healthy</span></td></tr>
+    </table>
+  </div>
+
+  <h2>Pulling the numbers yourself</h2>
+  <p class="lead">Every chart here comes from the public API.</p>
+<pre><span class="c">// Revenue by month for the current quarter</span>
+<span class="k">const</span> orbit = <span class="k">new</span> Orbit({ token: process.env.ORBIT_TOKEN });
+<span class="k">const</span> report = <span class="k">await</span> orbit.reports.get(<span class="s">"revenue"</span>, {
+  from: <span class="s">"2026-07-01"</span>,
+  to: <span class="s">"2026-09-30"</span>,
+  groupBy: <span class="s">"month"</span>,
+});
+console.table(report.rows);</pre>
+
+  <h2>From the customers</h2>
+  <div class="card" style="padding:32px">
+    <blockquote>"We used to spend the first week of every quarter building this deck by hand. Now finance opens one link and it's already there."</blockquote>
+    <div class="who"><i></i><span><b style="color:var(--ink)">Maya Okafor</b> · VP Finance, Lumen Labs</span></div>
+  </div>
+
+  <h2>Timeline</h2>
+  <p class="lead">The quarter, week by week.</p>
+  <div class="timeline">
+    <div class="card"><time>Jul 3</time><p><b style="color:var(--ink)">Live dashboards</b> reached every workspace after a two-week beta with 400 teams.</p></div>
+    <div class="card"><time>Jul 21</time><p><b style="color:var(--ink)">Two-way sync</b> launched for Google Sheets, with Excel following in August.</p></div>
+    <div class="card"><time>Aug 9</time><p><b style="color:var(--ink)">Lumen Labs</b> expanded to 1,240 seats, the largest deal in Orbit's history.</p></div>
+    <div class="card"><time>Aug 28</time><p><b style="color:var(--ink)">Approvals</b> shipped, cutting report sign-off from four days to one.</p></div>
+    <div class="card"><time>Sep 12</time><p><b style="color:var(--ink)">Saved views</b> and the command bar landed in the same release.</p></div>
+    <div class="card"><time>Sep 30</time><p><b style="color:var(--ink)">Quarter closed</b> at $4.82M, 12% above plan.</p></div>
+  </div>
+
+  <h2>Next quarter</h2>
+  <p class="lead">Three bets for Q4: forecasting, a mobile app, and SOC 2 Type II.</p>
+  <div class="grid">
+    <div class="card feature"><h3>Forecasting</h3><p>Project any metric 90 days out from its own history and seasonality.</p></div>
+    <div class="card feature"><h3>Orbit for iOS</h3><p>Read every report on the go, with alerts for goals that drift.</p></div>
+    <div class="card feature"><h3>SOC 2 Type II</h3><p>The audit window opens in October and closes in January.</p></div>
+  </div>
+</main>
+<footer><span>Orbit Inc. · Quarterly report</span><span>Prepared for the board · October 2026</span></footer>
+<div class="help">?</div>
+<script>
+  const sets = [[42, 48, 51, 55, 60, 64, 74, 83, 96], [30, 34, 39, 41, 47, 52, 58, 66, 71], [55, 52, 60, 66, 63, 70, 78, 80, 92]];
+  const bars = document.getElementById('bars');
+  sets[0].forEach(() => bars.appendChild(document.createElement('div')));
+  function show(i) {
+    [...bars.children].forEach((b, j) => b.style.height = sets[i][j] + '%');
+    document.querySelectorAll('.tabs button').forEach((t, j) => t.classList.toggle('on', i === j));
+  }
+  document.querySelectorAll('.tabs button').forEach((t, i) => t.onclick = () => show(i));
+  show(0);
+</script>
+</body>
+</html>
