@@ -1,0 +1,64 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: dotnet build src/Snip/Snip.csproj -c Release -nologo
+
+      - name: Unit tests
+        run: dotnet test tests/Snip.Tests/Snip.Tests.csproj -c Release -nologo
+
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory dist | Out-Null
+          Copy-Item src/Snip/bin/Release/net48/Snip.exe dist/Snip.exe
+          $hash = (Get-FileHash dist/Snip.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          Set-Content dist/Snip.exe.sha256 "$hash  Snip.exe" -NoNewline
+          Get-Content dist/Snip.exe.sha256
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Snip
+          path: dist/
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: Snip
+          path: dist/
+
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = $env:GITHUB_REF_NAME.TrimStart('v')
+          $project = [xml](Get-Content src/Snip/Snip.csproj -Raw)
+          $built = $project.Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          if ($built -ne $version) { throw "Tag $env:GITHUB_REF_NAME doesn't match <Version>$built</Version> in Snip.csproj" }
+          $changelog = Get-Content CHANGELOG.md -Raw
+          $section = [regex]::Match($changelog, "(?ms)^## $([regex]::Escape($version))\s*\r?\n(.*?)(?=^## |\z)").Groups[1].Value.Trim()
+          if (-not $section) { throw "CHANGELOG.md has no section for $version" }
+          Set-Content notes.md $section
+          gh release create $env:GITHUB_REF_NAME dist/Snip.exe dist/Snip.exe.sha256 --title "Snip $env:GITHUB_REF_NAME" --notes-file notes.md

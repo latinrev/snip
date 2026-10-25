@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Snip scroll test</title>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 18px/1.5 Segoe UI, sans-serif; background: #fafafa; }
+  nav { position: sticky; top: 0; background: #1e1e3c; color: #fff; padding: 18px 24px; font-weight: 600; z-index: 2; }
+  .chat { position: fixed; right: 24px; bottom: 24px; background: #e81123; color: #fff; border-radius: 28px; padding: 14px 22px; font-weight: 600; z-index: 3; }
+  section { height: 260px; margin: 20px auto; max-width: 900px; border-radius: 12px; padding: 24px; box-sizing: border-box; color: #111; opacity: 0; transform: translateY(20px); transition: opacity .4s, transform .4s; }
+  section.seen { opacity: 1; transform: none; }
+  section h2 { margin: 0 0 8px; font-size: 32px; }
+  .blank { height: 900px; }
+  footer { background: #333; color: #fff; padding: 40px; text-align: center; }
+</style></head>
+<body>
+<nav>STICKY NAV · Snip scroll test</nav>
+<div id="list"></div>
+<footer>END OF PAGE</footer>
+<div class="chat">CHAT</div>
+<script>
+  const list = document.getElementById('list');
+  for (let i = 1; i <= 40; i++) {
+    const s = document.createElement('section');
+    s.style.background = `hsl(${(i * 37) % 360} 70% 80%)`;
+    s.innerHTML = `<h2>Section ${i}</h2><p>Line one of section ${i}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Line two of section ${i}.</p>`;
+    list.appendChild(s);
+    if (i === 20) { const b = document.createElement('div'); b.className = 'blank'; list.appendChild(b); }
+  }
+  var io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('seen')));
+  document.querySelectorAll('section').forEach(s => io.observe(s));
+</script>
+</body></html>
